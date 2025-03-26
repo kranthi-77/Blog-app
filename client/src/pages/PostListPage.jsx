@@ -6,7 +6,7 @@ const PostListPage = ()=>{
     const [open,setOpen] =useState()
     return (
         <div>
-            <h1 className="mb-8 text-2xl">Develpment Blog</h1>
+            <h1 className="mb-8 text-2xl">Your Searched Posts</h1>
             <button className="bg-blue-800 text-sm text-white px-4 py-2 rounded-2xl mb-2 md:hidden"  onClick={()=>setOpen((prev)=>!prev)}>
                 {open ? "Close":"Filter or Search" }
             </button>

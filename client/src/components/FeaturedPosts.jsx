@@ -18,7 +18,12 @@ const FeaturedPosts = () => {
   });
 
   if (isPending) return "loading...";
-  if (error) return "Something went wrong!" + error.message;
+  if (error) return(
+    <div className="flex flex-col items-center py-4 " >
+      <img alt='not-loaded' src='https://assets.ccbp.in/frontend/react-js/nxt-trendz/nxt-trendz-products-error-view.png'/>
+      <h1>Something went wrong! ${error.message}</h1>
+    </div>
+  ) 
 
   const posts = data.posts;
   if (!posts || posts.length === 0) {

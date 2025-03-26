@@ -6,15 +6,19 @@ import Comments from "../components/Comments"
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { format } from "timeago.js";
+import { useAuth } from "@clerk/clerk-react"
 
 const fetchPost = async (slug) => {
     const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts/${slug}`);
     return res.data;
   };
 
+
 const SinglePostPage = ()=>{
     const { slug } = useParams();
-
+    // const {getToken}  = useAuth()
+    // const token = getToken()
+    const { isSignedIn } = useAuth();
     const { isPending, error, data } = useQuery({
         queryKey: ["post", slug],
         queryFn: () => fetchPost(slug),
@@ -73,7 +77,8 @@ const SinglePostPage = ()=>{
                     </p>
                 
                 </div>
-                <div className="hidden md:block px-4 h-max stickey top-8">
+
+                {isSignedIn && <div className="hidden md:block px-4 h-max stickey top-8">
                     <h1 className="mt-8 mb-4 text-sm font-medium">Author</h1>
                     <div className="flex flex-col gap-4">
                         <div className="flex items-center gap-8">
@@ -93,16 +98,19 @@ const SinglePostPage = ()=>{
                     <PostMenuActions post={data}/>
                     <h1 className="mt-8 mb-4 text-sm font-medium">Categories</h1>
                     <div className="flex flex-col gap-3 text-sm">
-                        <Link className="underline" to='/'>All</Link>
-                        <Link className="underline" to='/'>Web Design</Link>
-                        <Link className="underline" to='/'>Development</Link>
-                        <Link className="underline" to='/'>Database</Link>
-                        <Link className="underline" to='/'>Search Engines</Link>
-                        <Link className="underline" to='/'>Marketing</Link>
+                        <Link className="underline hover:text-blue-600" to='/'>All</Link>
+                        <Link className="underline hover:text-blue-600" to='/'>Web Design</Link>
+                        <Link className="underline hover:text-blue-600" to='/'>Development</Link>
+                        <Link className="underline hover:text-blue-600" to='/'>Database</Link>
+                        <Link className="underline hover:text-blue-600" to='/'>Search Engines</Link>
+                        <Link className="underline hover:text-blue-600" to='/'>Marketing</Link>
                     </div>
                     <h1 className="mt-8 mb-4 text-md font-medium">Search</h1>
                      <Search/>
                 </div>
+                }
+
+                
             </div>
             <Comments postId={data._id}/>
         </div>

@@ -36,8 +36,12 @@ const PostList = () => {
   if (isFetching) return "Loading...";
   
 
-  if (error) return "Something went wrong!";
-
+  if (error) return (
+      <div className="flex flex-col items-center py-4 " >
+      <img alt='not-loaded' src='https://assets.ccbp.in/frontend/react-js/nxt-trendz/nxt-trendz-products-error-view.png'/>
+      <h1>Something went wrong! ${error.message}</h1>
+    </div>
+    )
   const allPosts = data?.pages?.flatMap((page) => page.posts) || [];
 
   return (
@@ -46,15 +50,18 @@ const PostList = () => {
       next={fetchNextPage}
       hasMore={!!hasNextPage}
       loader={<h4>Loading more posts...</h4>}
-      endMessage={
-        <p>
-          <b>All posts loaded!</b>
-        </p>
-      }
-    >
-      {allPosts.map((post) => (
+    > {allPosts.length ? <div>
+        {
+        allPosts.map((post) => (
         <PostListItem key={post._id} post={post} />
-      ))}
+      ))}</div>
+      : 
+      <div className="flex flex-col items-center">
+        <img src='https://assets.ccbp.in/frontend/react-js/nxt-trendz/nxt-trendz-no-products-view.png'/>
+        <h1 className="py-4 text-grey font-bold">No Posts Found</h1>
+      </div>
+      }
+      
     </InfiniteScroll>
   );
 };

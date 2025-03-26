@@ -6,8 +6,8 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import Upload from "../components/Upload";
-
+import Upload from "../components/Upload.jsx";
+import { Link } from "react-router-dom";
 const Write = () => {
   const { isLoaded, isSignedIn } = useUser();
   const [value, setValue] = useState("");
@@ -47,11 +47,18 @@ const Write = () => {
   });
 
   if (!isLoaded) {
-    return <div className="">Loading...</div>;
+    return <div className="">
+      <h1>Loading</h1>
+    </div>;
   }
 
   if (isLoaded && !isSignedIn) {
-    return <div className="">You should login!</div>;
+    return  <div className="flex flex-col items-center gap-4 mt-12">
+      <img alt='login-img' src='https://assets.ccbp.in/frontend/react-js/nxt-trendz/nxt-trendz-no-products-view.png'/>
+    <Link to='/login'>
+      <button className="bg-blue-800 py-2 px-4 rounded-3xl text-white">Please Login</button>
+      </Link>
+  </div>;
   }
 
   const handleSubmit = (e) => {
