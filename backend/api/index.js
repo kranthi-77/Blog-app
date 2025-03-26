@@ -1,12 +1,13 @@
 import express from "express";
-import './config/dotenv.js';
-import connectDB from "./config/db.js";
-import userRouter from "./routes/userRoute.js";
-import postRouter from "./routes/postRoute.js";
-import commentRouter from "./routes/commentRoute.js";
-import webhookRouter from "./routes/webhookRoute.js";
-import { clerkMiddleware,requireAuth } from '@clerk/express'
 import cors from 'cors'
+import '../config/dotenv.js';
+import connectDB from "../config/db.js";
+import userRouter from "../routes/userRoute.js";
+import postRouter from "../routes/postRoute.js";
+import commentRouter from "../routes/commentRoute.js";
+import webhookRouter from "../routes/webhookRoute.js";
+import { clerkMiddleware } from '@clerk/express'
+import serverless from "serverless-http";
 
 const app = express()
 
@@ -40,5 +41,4 @@ app.use((error,req,res,next)=>{
 
 connectDB();
 
-// ✅ Vercel needs this export
-export default serverless(app);
+export const handler= serverless(app);
