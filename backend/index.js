@@ -33,7 +33,12 @@ app.use((error,req,res,next)=>{
         stack: error.stack,
     })
 })
-app.listen(3000,()=>{
-    connectDB()
-    console.log("serve is running")
-})
+// app.listen(3000,()=>{
+//     connectDB()
+//     console.log("serve is running")
+// })
+
+connectDB();
+
+// ✅ Vercel needs this export
+export default serverless(app);
