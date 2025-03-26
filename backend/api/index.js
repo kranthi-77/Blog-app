@@ -13,6 +13,13 @@ import serverless from "serverless-http";
 
 const app = express()
 
+try {
+  await connectDB();
+} catch (err) {
+  console.error("MongoDB connection error:", err);
+}
+
+
 app.use(cors({
   origin: process.env.CLIENT_URL,
   methods: 'GET,POST,PUT,PATCH,DELETE,OPTIONS',
@@ -57,5 +64,5 @@ app.use((error,req,res,next)=>{
 //     connectDB()
 //     console.log("serve is running")
 // })
-connectDB(); 
-export default handler = serverless(app);
+
+export default serverless(app);
