@@ -3,13 +3,13 @@ import cors from 'cors'
 import dotenv from 'dotenv';
 dotenv.config();
 
-import connectDB from "./config/db.js";
-import userRouter from "./routes/userRoute.js";
-import postRouter from "./routes/postRoute.js";
-import commentRouter from "./routes/commentRoute.js";
-import webhookRouter from "./routes/webhookRoute.js";
+import connectDB from "../config/db.js";
+import userRouter from "../routes/userRoute.js";
+import postRouter from "../routes/postRoute.js";
+import commentRouter from "../routes/commentRoute.js";
+import webhookRouter from "../routes/webhookRoute.js";
 import { clerkMiddleware } from '@clerk/express'
-// import serverless from "serverless-http";
+import serverless from "serverless-http";
 
 const app = express()
 
@@ -53,8 +53,9 @@ app.use((error,req,res,next)=>{
     })
 })
 
-app.listen(3000,()=>{
-    connectDB()
-    console.log("serve is running")
-})
-
+// app.listen(3000,()=>{
+//     connectDB()
+//     console.log("serve is running")
+// })
+connectDB(); 
+export default handler = serverless(app);
