@@ -10,17 +10,16 @@ import cors from 'cors'
 
 const app = express()
 
+app.use(cors({
+  origin: process.env.CLIENT_URL,
+  credentials: true,
+}));
 
 app.use(clerkMiddleware())
 
 app.use('/webhooks',webhookRouter)
 
 app.use(express.json())
-
-app.use(cors({
-  origin: process.env.CLIENT_URL,
-  credentials: true,
-}));
 
 app.use('/users',userRouter)
 app.use('/posts',postRouter)
