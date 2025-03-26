@@ -1,11 +1,10 @@
 import express from 'express'
+import { getUserSavedPosts, savePost } from '../controllers/userController.js'
 
 const router =express.Router()
 
-router.get('/',(req,res)=>{
-    res.send('My app is running')
-})
-
+router.get("/saved", getUserSavedPosts)
+router.patch("/save", savePost)
 
 
 

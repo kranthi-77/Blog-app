@@ -1,6 +1,6 @@
 import { IKContext, IKUpload } from "imagekitio-react";
 import { useRef } from "react";
-import { toast } from "react-toastify"
+import { toast } from "react-toastify";
 
 const authenticator = async () => {
   try {

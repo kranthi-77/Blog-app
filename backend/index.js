@@ -25,9 +25,6 @@ app.use(function (req, res, next) {
     );
     next();
   });
-// app.get("/protect2", requireAuth(), (req, res) => {
-// res.status(200).json("content")
-// });
 
 
 app.use('/users',userRouter)
@@ -35,9 +32,11 @@ app.use('/posts',postRouter)
 app.use('/comments',commentRouter)
 
 app.use((error,req,res,next)=>{
+  res.status(error.status || 500);
     res.json({
         message:error.message || "something went wrong",
-        status:error.status
+        status:error.status,
+        stack: error.stack,
     })
 })
 app.listen(3000,()=>{
