@@ -13,6 +13,26 @@ import serverless from "serverless-http";
 
 const app = express()
 
+const allowedOrigins = [
+  "https://blog-app-frontend-henna.vercel.app", // ✅ your frontend domain
+  "http://localhost:3000"             // ✅ for local dev
+];
+
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true, 
+    allowedHeaders: ["Content-Type", "Authorization"], 
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
+  })
+);
+
 try {
   await connectDB();
 } catch (err) {
@@ -29,6 +49,10 @@ app.use('/webhooks',webhookRouter)
 
 app.use(express.json())
 
+app.get("/api/test", (req, res) => {
+  res.json({ message: "CORS works on Vercel!" });
+});
+
 app.use('/api/users', userRouter);
 app.use('/api/posts', postRouter);
 app.use('/api/comments', commentRouter);
@@ -42,12 +66,5 @@ app.use((error,req,res,next)=>{
     })
 })
 
-// For local development
-if (process.env.NODE_ENV !== 'production') {
-  app.listen(3000, () => {
-    console.log("Server is running on port 3000");
-  });
-}
 
-// Export for Vercel serverless
-export default app
+export default serverless(app)
