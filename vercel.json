@@ -1,31 +1,16 @@
 {
-    "version": 2,
-    "builds": [
-      {
-        "src": "backend/index.js",
-        "use": "@vercel/node"
-      },
-      {
-        "src": "client/package.json",
-        "use": "@vercel/static-build",
-        "config": {
-          "distDir": "dist"
-        }
-      }
-    ],
-    "routes": [
-      {
-        "src": "/api/(.*)",
-        "dest": "/backend"
-      },
-      {
-        "src": "/(.*)",
-        "dest": "client/dist/$1",
-        "headers": {
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Methods": "GET,POST,PUT,PATCH,DELETE,OPTIONS",
-          "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
-        }
-      }
-    ]
-  }
+  "version": 2,
+  "builds": [
+    {"src": "backend/index.js",
+     "use": "@vercel/node"
+    },
+    {
+      "src": "client/package.json",
+     "use": "@vercel/static-build",
+     "config": {"distDir": "dist"}}
+  ],
+  "routes": [
+    {"src": "/api/(.*)", "dest": "/backend/index.js"},
+    {"src": "/(.*)", "dest": "/client/dist/$1"}
+  ]
+}
