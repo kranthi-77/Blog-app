@@ -10,7 +10,7 @@
       "use": "@vercel/static-build",
       "config": {
         "distDir": "dist",
-        "cleanDistDir": true
+        "outputDirectory": "client/dist"
       }
     }
   ],
@@ -21,12 +21,10 @@
     },
     {
       "src": "/(.*)",
-      "dest": "/client/dist/$1",
-      "continue": true
+      "dest": "/client/dist/$1"
     },
     {
       "src": "/.*",
-      "status": 404,
       "dest": "/client/dist/index.html"
     }
   ]

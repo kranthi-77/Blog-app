@@ -20,10 +20,7 @@ try {
 }
 
 
-app.use(cors({
-  origin: /\.your-app\.vercel\.app$/, 
-  credentials: true
-}))
+
 
 
 app.use(clerkMiddleware())
