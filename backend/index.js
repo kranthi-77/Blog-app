@@ -67,4 +67,4 @@ app.use((error,req,res,next)=>{
 })
 
 
-export default serverless(app)
+export default app
