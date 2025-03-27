@@ -1,3 +1,4 @@
+import React from 'react';
 import { IKImage } from 'imagekitio-react';
 
 const Image = ({src,className,w,alt,h})=>{

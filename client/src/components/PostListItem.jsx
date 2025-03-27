@@ -1,3 +1,4 @@
+import React from 'react';
 import { Link } from "react-router-dom";
 import Image from "./Image.jsx";
 import { format } from "timeago.js";

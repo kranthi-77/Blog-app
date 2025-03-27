@@ -1,3 +1,4 @@
+import React from 'react';
 import axios from "axios";
 import Comment from "./Comment.jsx";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";

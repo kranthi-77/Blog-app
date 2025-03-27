@@ -1,3 +1,4 @@
+import React from 'react';
 import { format } from "timeago.js";
 import Image from "./Image";
 import { useAuth, useUser } from "@clerk/clerk-react";
