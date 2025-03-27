@@ -21,24 +21,9 @@ try {
 
 
 app.use(cors({
-  origin: process.env.CLIENT_URL,
-  methods: 'GET,POST,PUT,PATCH,DELETE,OPTIONS',
-  credentials: true 
+  origin: /\.your-app\.vercel\.app$/, 
+  credentials: true
 }))
-
-app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", process.env.CLIENT_URL);
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept Authorization"
-  );
-  res.header("Access-Control-Allow-Methods", "GET,POST,PUT,PATCH,DELETE,OPTIONS");
-  if (req.method === 'OPTIONS') {
-    return res.sendStatus(200);
-  }
-
-  next();
-});
 
 
 app.use(clerkMiddleware())
