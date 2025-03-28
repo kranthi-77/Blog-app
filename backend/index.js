@@ -14,8 +14,8 @@ import serverless from "serverless-http";
 const app = express()
 
 const allowedOrigins = [
-  "https://blog-app-frontend-henna.vercel.app", // ✅ your frontend domain
-  "http://localhost:3000"             // ✅ for local dev
+  "https://blog-app-frontend-henna.vercel.app", 
+  "http://localhost:3000"             
 ];
 
 app.use(
