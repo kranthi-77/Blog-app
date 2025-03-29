@@ -22,6 +22,9 @@ const SideMenu = () => {
     }
   };
 
+  const clearAllFilters = ()=>{
+    setSearchParams({});
+  }
 
   return (
     <div className="px-4 h-max sticky top-8">
@@ -72,12 +75,17 @@ const SideMenu = () => {
       </div>
       <h1 className="mt-8 mb-4 text-sm font-medium">Categories</h1>
       <div className="flex flex-col gap-2 text-sm">
-        <span className="underline cursor-pointer hover:text-blue-600" onClick={()=>handleCategoryChange(" ")}>All</span>
-        <span className="underline cursor-pointer hover:text-blue-600" onClick={()=>handleCategoryChange("web-design")}>Web Design</span>
-        <span className="underline cursor-pointer hover:text-blue-600" onClick={()=>handleCategoryChange("development")}>Development</span>
-        <span className="underline cursor-pointer hover:text-blue-600" onClick={()=>handleCategoryChange("databases")}>Databases</span>
-        <span className="underline cursor-pointer hover:text-blue-600" onClick={()=>handleCategoryChange("seo")}>Search Engines</span>
-        <span className="underline cursor-pointer hover:text-blue-600" onClick={()=>handleCategoryChange("marketing")}>Marketing</span>
+        <Link to='/posts'>
+          <span className="cursor-pointer hover:text-blue-600" >All</span>
+        </Link>
+        <span className="cursor-pointer hover:text-blue-600" onClick={()=>handleCategoryChange("web-design")}>Web Design</span>
+        <span className="cursor-pointer hover:text-blue-600" onClick={()=>handleCategoryChange("development")}>Development</span>
+        <span className="cursor-pointer hover:text-blue-600" onClick={()=>handleCategoryChange("databases")}>Databases</span>
+        <span className="cursor-pointer hover:text-blue-600" onClick={()=>handleCategoryChange("seo")}>Search Engines</span>
+        <span className="cursor-pointer hover:text-blue-600" onClick={()=>handleCategoryChange("marketing")}>Marketing</span>
+      </div>
+      <div className="mt-4">
+        <button onClick={clearAllFilters} className="bg-transparent py-2 cursor-pointer rounded-3xl text-blue-400">Clear all Filters</button>
       </div>
     </div>
   );

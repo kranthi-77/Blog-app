@@ -1,4 +1,5 @@
 import User from "../models/userModel.js";
+import Post from '../models/postsModel.js'
 
 export const getUserSavedPosts = async (req, res) => {
   const clerkUserId = req.auth.userId;
@@ -9,7 +10,15 @@ export const getUserSavedPosts = async (req, res) => {
 
   const user = await User.findOne({ clerkUserId });
   console.log(user)
-  res.status(200).json(user.savedPosts);
+  const savedPosts = await Promise.all(
+    user.savedPosts.map(async (postId) => {
+      return await Post.findById(postId).populate("user", "username");
+    })
+  );
+
+  const filteredPosts = savedPosts.filter(post => post !== null);
+
+  res.status(200).json(filteredPosts);
 };
 
 export const savePost = async (req, res) => {
@@ -33,6 +42,5 @@ export const savePost = async (req, res) => {
       $pull: { savedPosts: postId },
     });
   }
-
   res.status(200).json(isSaved ? "Post unsaved" : "Post saved");
 };

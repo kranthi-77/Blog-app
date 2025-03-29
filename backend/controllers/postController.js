@@ -76,6 +76,22 @@ export const getPosts = async (req,res)=>{
     res.status(200).json({ posts, hasMore });
   };
 
+  export const getUserPosts = async (req,res) => {
+    try {
+      const clerkUserId = req.auth.userId
+      const user = await User.findOne({clerkUserId})
+      
+      if (!user) {
+        return res.status(404).json({ error: "User not found" });
+      }
+      const userPosts = await Post.find({ user: user._id}).populate("user", "username")
+  
+      res.status(200).json(userPosts)
+    } catch (error) {
+      console.error("Error fetching user posts:", error);
+      res.status(500).json({ error: "Failed to fetch user posts" })
+    }
+  }
 
 export const getPost = async (req,res)=>{
     try {

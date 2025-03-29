@@ -18,6 +18,8 @@ import {
 } from '@tanstack/react-query'
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import SavedPostListPage from './pages/SavedPostListPage.jsx';
+import UserPostsPage from './pages/UserPostsPage.jsx';
 
 const queryClient = new QueryClient()
 
@@ -38,6 +40,14 @@ const router = createBrowserRouter([
       {
         path: "/posts",
         element: <PostListPage />,
+      },
+      {
+        path: "/saved-posts",
+        element: <SavedPostListPage/>,
+      },
+      {
+        path: "/my-posts",
+        element: <UserPostsPage/>,
       },
       {
         path: "/:slug",

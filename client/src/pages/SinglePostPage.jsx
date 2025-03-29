@@ -51,7 +51,7 @@ const SinglePostPage = ()=>{
                     )}
                 </div>
             <div className="flex flex-col md:flex-row gap-12">
-                <div className="lg:text-lg flex flex-col gap-6 text-justify">
+                <div className="lg:text-lg mb-12 flex flex-col gap-6 text-justify">
                     <p>
                     Web design is the art and science of creating visually appealing, functional, and user-friendly websites.
                     It involves a combination of layout, color schemes, typography, and interactive elements to ensure an engaging experience for users. 
@@ -99,12 +99,12 @@ const SinglePostPage = ()=>{
                     <PostMenuActions post={data}/>
                     <h1 className="mt-8 mb-4 text-sm font-medium">Categories</h1>
                     <div className="flex flex-col gap-3 text-sm">
-                        <Link className="underline hover:text-blue-600" to='/'>All</Link>
-                        <Link className="underline hover:text-blue-600" to='/'>Web Design</Link>
-                        <Link className="underline hover:text-blue-600" to='/'>Development</Link>
-                        <Link className="underline hover:text-blue-600" to='/'>Database</Link>
-                        <Link className="underline hover:text-blue-600" to='/'>Search Engines</Link>
-                        <Link className="underline hover:text-blue-600" to='/'>Marketing</Link>
+                        <Link className="hover:text-blue-600" to='/'>All</Link>
+                        <Link className="hover:text-blue-600" to='/'>Web Design</Link>
+                        <Link className="hover:text-blue-600" to='/'>Development</Link>
+                        <Link className="hover:text-blue-600" to='/'>Database</Link>
+                        <Link className="hover:text-blue-600" to='/'>Search Engines</Link>
+                        <Link className="hover:text-blue-600" to='/'>Marketing</Link>
                     </div>
                     <h1 className="mt-8 mb-4 text-md font-medium">Search</h1>
                      <Search/>
@@ -113,7 +113,7 @@ const SinglePostPage = ()=>{
 
                 
             </div>
-            <Comments postId={data._id}/>
+            {isSignedIn && <Comments postId={data._id}/>}
         </div>
 
     )

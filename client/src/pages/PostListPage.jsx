@@ -3,17 +3,17 @@ import { useState } from "react"
 import PostList from "../components/PostList"
 import SideMenu from "../components/SideMenu"
 
-const PostListPage = ()=>{
+const PostListPage = ({type='all'})=>{
     const [open,setOpen] =useState()
     return (
         <div>
-            <h1 className="mb-8 text-2xl">Your Searched Posts</h1>
+            <h1 className="mb-8 text-2xl">Posts</h1>
             <button className="bg-blue-800 text-sm text-white px-4 py-2 rounded-2xl mb-2 md:hidden"  onClick={()=>setOpen((prev)=>!prev)}>
                 {open ? "Close":"Filter or Search" }
             </button>
             <div className="flex flex-col-reverse md:flex-row gap-8">
                 <div className="">
-                    <PostList/>
+                    <PostList />
                 </div>
                 <div className={`${!open&& 'hidden'} md:block`}>
                     <SideMenu/>

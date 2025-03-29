@@ -15,7 +15,7 @@ const app = express()
 
 const allowedOrigins = [
   "https://blog-app-frontend-henna.vercel.app", 
-  "http://localhost:3000"             
+  "http://localhost:5173"             
 ];
 
 app.use(
@@ -29,7 +29,7 @@ app.use(
     },
     credentials: true, 
     allowedHeaders: ["Content-Type", "Authorization"], 
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"]
   })
 );
 
@@ -66,5 +66,8 @@ app.use((error,req,res,next)=>{
     })
 })
 
+app.listen(3000,()=>{
+  console.log("server is running")
+})
 
 export default app
