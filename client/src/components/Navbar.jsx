@@ -15,7 +15,7 @@ const Navbar = ()=>{
         getToken().then(token=>console.log(token))
     },[])
     return (
-        <div className="w-full h-16 md:h-20 flex items-center justify-between">
+        <div className="w-full h-16 mb-4 md:h-20 flex items-center justify-between">
             <Link to='/' className="flex items-center gap-4 text-2xl font-bold">
                 <ImBlogger2 w={32} h={32} />
                 {/*why span elment*/}

@@ -38,8 +38,9 @@ const SinglePostPage = ()=>{
                     <div className="flex items-center gap-2 text-grey-400 text-sm">
                         <span>written by</span>
                         <Link className="text-blue-500">{data.user.username}</Link>
-                        <Link className="text-blue-500">{data.category}</Link>
                         <span>on</span>
+                        <Link className="text-blue-500">{data.category}</Link>
+                        
                         <span>{format(data.createdAt)}</span>
                     </div>
                     <p className="text-grey-500 font-medium">{data.desc}</p>
@@ -51,32 +52,7 @@ const SinglePostPage = ()=>{
                     )}
                 </div>
             <div className="flex flex-col md:flex-row gap-12">
-                <div className="lg:text-lg mb-12 flex flex-col gap-6 text-justify">
-                    <p>
-                    Web design is the art and science of creating visually appealing, functional, and user-friendly websites.
-                    It involves a combination of layout, color schemes, typography, and interactive elements to ensure an engaging experience for users. 
-                    A well-designed website is not just about aesthetics; it also focuses on usability, accessibility, and responsiveness.
-                    With the increasing variety of devices, web designers must ensure that websites adapt seamlessly to different screen sizes, providing a smooth and consistent experience for all users.
-                    Web design is the art and science of creating visually appealing, functional, and user-friendly websites.
-                    It involves a combination of layout, color schemes, typography, and interactive elements to ensure an engaging experience for users. A well-designed website is not just about aesthetics;
-                    it also focuses on usability, accessibility, and responsiveness. With the increasing variety of devices, web designers must ensure that websites adapt seamlessly to different screen sizes,
-                     providing a smooth and consistent experience for all users.
-                    Web design is the art and science of creating visually appealing, functional, and user-friendly websites.
-                    
-                    </p>
-                    <p>
-                    Web design is the art and science of creating visually appealing, functional, and user-friendly websites.
-                    It involves a combination of layout, color schemes, typography, and interactive elements to ensure an engaging experience for users. 
-                    A well-designed website is not just about aesthetics; it also focuses on usability, accessibility, and responsiveness.
-                    With the increasing variety of devices, web designers must ensure that websites adapt seamlessly to different screen sizes, providing a smooth and consistent experience for all users.
-                    Web design is the art and science of creating visually appealing, functional, and user-friendly websites.
-                    It involves a combination of layout, color schemes, typography, and interactive elements to ensure an engaging experience for users. A well-designed website is not just about aesthetics;
-                    it also focuses on usability, accessibility, and responsiveness. With the increasing variety of devices, web designers must ensure that websites adapt seamlessly to different screen sizes,
-                     providing a smooth and consistent experience for all users.
-                    Web design is the art and science of creating visually appealing, functional, and user-friendly websites.
-                    
-                    </p>
-                
+                <div className="lg:text-lg mb-12 flex flex-col gap-6 text-justify" dangerouslySetInnerHTML={{ __html: data.content }}>
                 </div>
 
                 {isSignedIn && <div className="hidden md:block px-4 h-max stickey top-8">
