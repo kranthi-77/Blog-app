@@ -4,6 +4,7 @@ import Comment from "./Comment.jsx";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useAuth, useUser } from "@clerk/clerk-react";
 import { toast } from "react-toastify";
+import Loader from './Loading.jsx';
 
 const fetchComments = async (postId) => {
   const res = await axios.get(
@@ -72,7 +73,7 @@ const Comments = ({ postId }) => {
         </button>
       </form>
       {isPending ? (
-        "Loading..."
+        <Loader/>
       ) : error ? (
         "Error loading comments!"
       ) : (

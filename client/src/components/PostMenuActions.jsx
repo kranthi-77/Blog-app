@@ -4,6 +4,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import Loading from './Loading';
 
 const PostMenuActions = ({ post }) => {
   const { user } = useUser();
@@ -114,7 +115,7 @@ const PostMenuActions = ({ post }) => {
     <div className="">
       <h1 className="mt-8 mb-4 text-sm font-medium">Actions</h1>
       {isPending ? (
-        "Loading..."
+        <Loading/>
       ) : error ? (
         "Saved post fetching failed!"
       ) : (

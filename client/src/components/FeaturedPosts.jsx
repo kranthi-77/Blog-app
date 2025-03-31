@@ -4,6 +4,7 @@ import Image from "./Image";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { format } from "timeago.js";
+import Loading from './Loading';
 
 const fetchPost = async () => {
   const res = await axios.get(
@@ -18,7 +19,7 @@ const FeaturedPosts = () => {
     queryFn: () => fetchPost(),
   });
 
-  if (isPending) return "loading...";
+  if (isPending) return <Loading/>;
   if (error) return(
     <div className="flex flex-col items-center py-4 " >
       <img alt='not-loaded' src='https://assets.ccbp.in/frontend/react-js/nxt-trendz/nxt-trendz-products-error-view.png'/>

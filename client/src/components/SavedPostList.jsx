@@ -3,6 +3,7 @@ import PostListItem from "./PostListItem.jsx";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useAuth } from '@clerk/clerk-react';
+import Loading from './Loading.jsx';
 
 
 const fetchSavedPosts = async (token) => {
@@ -27,7 +28,7 @@ const SavedPostsList = () => {
 
   console.log(savedPosts)
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <Loading/>;
 
   if (error) {
     return (

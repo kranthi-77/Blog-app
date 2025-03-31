@@ -21,6 +21,7 @@ const Homepage = ()=>{
                 </div>
             </div>
             <MainCategories/>
+            <h1 className="my-4 text-2xl font-medium text-grey-600">Featured Posts</h1>
             <FeaturedPosts/>
             <div className="">
                 <h1 className="my-8 text-2xl text-grey-600">Recent Posts</h1>

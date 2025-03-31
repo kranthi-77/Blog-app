@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Upload from "../components/Upload.jsx";
 import { Link } from "react-router-dom";
+import Loading from '../components/Loading.jsx';
 const Write = () => {
   const { isLoaded, isSignedIn } = useUser();
   const [value, setValue] = useState("");
@@ -49,7 +50,7 @@ const Write = () => {
 
   if (!isLoaded) {
     return <div className="">
-      <h1>Loading</h1>
+      <div className='flex items-center justify-center'><Loading/></div>;
     </div>;
   }
 

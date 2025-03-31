@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useAuth } from '@clerk/clerk-react';
 import { Link } from 'react-router-dom';
+import Loading from './Loading.jsx';
 
 
 const fetchUserPosts = async (token) => {
@@ -27,7 +28,7 @@ const UserPostsList = () => {
   });
 
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <Loading/>;;
 
   if (error) {
     return (
