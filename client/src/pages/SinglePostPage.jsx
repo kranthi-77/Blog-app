@@ -8,6 +8,7 @@ import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { format } from "timeago.js";
 import { useAuth } from "@clerk/clerk-react"
+import Loading from '../components/Loading.jsx';
 
 const fetchPost = async (slug) => {
     const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts/${slug}`);
@@ -25,7 +26,7 @@ const SinglePostPage = ()=>{
         queryFn: () => fetchPost(slug),
     });
 
-    if (isPending) return "loading...";
+    if (isPending) return <Loading/>;
     if (error) return "Something went wrong!" + error.message;
     if (!data) return "Post not found!";
 
