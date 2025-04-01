@@ -9,7 +9,6 @@ import postRouter from "./routes/postRoute.js";
 import commentRouter from "./routes/commentRoute.js";
 import webhookRouter from "./routes/webhookRoute.js";
 import { clerkMiddleware } from '@clerk/express'
-import serverless from "serverless-http";
 
 const app = express()
 

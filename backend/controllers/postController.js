@@ -117,7 +117,11 @@ export const createPost = async (req,res)=>{
         if(!user){
             return res.status(404).json("user not found") 
         } 
-        let slug = req.body.title.replace(/ /g,'-').toLowerCase()
+        let slug = req.body.title.toLowerCase()
+                      .replace(/[^\w\s-]/g, '')  
+                      .trim()                  
+                      .replace(/\s+/g, '-')
+                      .replace(/-+/g, '-');  
         let existingPost = await Post.findOne({ slug });
 
         let counter = 2;

@@ -1,16 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useUser, useAuth } from "@clerk/clerk-react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import Loading from './Loading';
+import Loading from './Loading.jsx';
 
 const PostMenuActions = ({ post }) => {
   const { user } = useUser();
   const { getToken } = useAuth();
   const navigate = useNavigate();
-  
+  const [isSave,saveFun] = useState(false)
   const {
     isPending,
     error,
@@ -108,6 +108,7 @@ const PostMenuActions = ({ post }) => {
     if (!user) {
       return navigate("/login");
     }
+    saveFun(prev=> !prev)
     saveMutation.mutate();
   };
 
@@ -134,13 +135,14 @@ const PostMenuActions = ({ post }) => {
               stroke="black"
               strokeWidth="2"
               fill={
-                saveMutation.isPending
-                  ? isSaved
-                    ? "none"
-                    : "black"
-                  : isSaved
-                  ? "black"
-                  : "none"
+                // saveMutation.isPending
+                //   ? isSaved
+                //     ? "none"
+                //     : "black"
+                //   : isSaved
+                //   ? "black"
+                //   : "none"
+                isSave ? "black":'none'
               }
             />
           </svg>
