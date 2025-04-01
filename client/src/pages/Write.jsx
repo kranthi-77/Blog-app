@@ -76,6 +76,10 @@ const Write = () => {
     };
 
     console.log(data);
+    if (!data.title || !data.category || !data.desc || !data.content) {
+      toast.error("Please fill the blog details to create a post");
+      return;
+    }
 
     mutation.mutate(data);
   };

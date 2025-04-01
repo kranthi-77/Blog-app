@@ -39,6 +39,7 @@ const Comments = ({ postId }) => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["comments", postId] });
+      window.location.reload();
     },
     onError: (error) => {
       toast.error(error.response.data);
@@ -52,7 +53,10 @@ const Comments = ({ postId }) => {
     const data = {
       desc: formData.get("desc"),
     };
-
+    if (!data.desc) {
+      toast.error("Add a comment");
+      return;
+    }
     mutation.mutate(data);
   };
 

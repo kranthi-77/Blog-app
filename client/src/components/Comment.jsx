@@ -1,6 +1,6 @@
 import React from 'react';
 import { format } from "timeago.js";
-import Image from "./Image";
+import Image from "./Image.jsx";
 import { useAuth, useUser } from "@clerk/clerk-react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
