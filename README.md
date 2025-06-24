@@ -19,33 +19,9 @@ A powerful and modern full-stack blogging platform built using the MERN stack, f
 📱 Responsive UI – Built with React Router, Tailwind CSS, and ReactQuill for rich editing.
 
 🧰 Tech Stack
-Frontend
-React.js
+Frontend: React.js, React Router, Tailwind CSS, ReactQuill, TanStack Query, Clerk Authentication, Vite
 
-React Router
-
-Tailwind CSS
-
-ReactQuill
-
-TanStack Query
-
-Clerk Authentication
-
-Vite
-
-Backend
-Node.js
-
-Express.js
-
-MongoDB (Mongoose)
-
-RESTful APIs
-
-Cron Jobs (for scheduled publishing)
-
-ImageKit.io – Image CDN
+Backend: Node.js, Express.js, MongoDB (Mongoose), RESTful APIs, Cron Jobs (for scheduled publishing), ImageKit.io – Image CDN
 
 Vercel – Frontend deployment
 
