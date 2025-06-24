@@ -39,6 +39,15 @@ const postSchema = new Schema(
       type: Number,
       default: 0,
     },
+    status: {
+      type: String,
+      enum: ['draft', 'scheduled', 'published'],
+      default: 'published',
+    },
+    publishAt: {
+      type: Date,
+      default: Date.now,
+    },
   },
   { timestamps: true }
 );

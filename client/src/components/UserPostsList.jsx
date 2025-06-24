@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PostListItem from "./PostListItem.jsx";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
@@ -6,19 +6,19 @@ import { useAuth } from '@clerk/clerk-react';
 import { Link } from 'react-router-dom';
 import Loading from './Loading.jsx';
 
-
 const fetchUserPosts = async (token) => {
-    const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts/my-posts`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-  
-    return res.data; 
-  };
+  const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts/my-posts`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 
-const UserPostsList = () => {
+  return res.data;
+};
+
+const UserPostsList = ({ onCountChange }) => {
   const { getToken } = useAuth();
+
   const { data: myPosts, isLoading, error } = useQuery({
     queryKey: ["myPosts"],
     queryFn: async () => {
@@ -27,8 +27,13 @@ const UserPostsList = () => {
     },
   });
 
+  useEffect(() => {
+    if (myPosts && onCountChange) {
+      onCountChange(myPosts.length);
+    }
+  }, [myPosts, onCountChange]);
 
-  if (isLoading) return <Loading/>;;
+  if (isLoading) return <Loading />;
 
   if (error) {
     return (
@@ -37,7 +42,7 @@ const UserPostsList = () => {
           alt="error"
           src="https://assets.ccbp.in/frontend/react-js/nxt-trendz/nxt-trendz-products-error-view.png"
         />
-        <h1>Something went wrong! {error.message}</h1>
+        <h1>Something went wrong!</h1>
       </div>
     );
   }
@@ -55,7 +60,7 @@ const UserPostsList = () => {
           <img src="https://assets.ccbp.in/frontend/react-js/nxt-trendz/nxt-trendz-no-products-view.png" />
           <h1 className="py-4 text-grey font-bold">Nothing here yet — create your first post!</h1>
           <Link className="pt-2" to="/write">
-              <button className="bg-blue-800 py-2 px-4 rounded-3xl text-white">Create a Post</button>
+            <button className="bg-blue-800 py-2 px-4 rounded-3xl text-white">Create a Post</button>
           </Link>
         </div>
       )}

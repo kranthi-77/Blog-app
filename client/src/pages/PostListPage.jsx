@@ -6,8 +6,7 @@ import SideMenu from "../components/SideMenu"
 const PostListPage = ({type='all'})=>{
     const [open,setOpen] =useState()
     return (
-        <div>
-            <h1 className="mb-8 text-2xl">Posts</h1>
+        <div className='mt-10'>
             <button className="bg-blue-800 text-sm text-white px-4 py-2 rounded-2xl mb-2 md:hidden"  onClick={()=>setOpen((prev)=>!prev)}>
                 {open ? "Close":"Filter or Search" }
             </button>

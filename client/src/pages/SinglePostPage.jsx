@@ -9,6 +9,7 @@ import { useQuery } from "@tanstack/react-query";
 import { format } from "timeago.js";
 import { useAuth } from "@clerk/clerk-react"
 import Loading from '../components/Loading.jsx';
+import { FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa";
 
 const fetchPost = async (slug) => {
     const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts/${slug}`);
@@ -32,7 +33,7 @@ const SinglePostPage = ()=>{
 
 
     return (
-        <div className="flex flex-col gap-8">
+        <div className="flex flex-col gap-8 mt-10">
             <div className="flex gap-8">
                 <div className="lg:w-3/5 flex flex-col gap-8">
                     <h1 className="text-xl md:text-3xl xl:text-4xl font-semibold">{data.title}</h1>
@@ -56,39 +57,55 @@ const SinglePostPage = ()=>{
                 <div className="lg:text-lg mb-12 flex flex-col gap-6 text-justify" dangerouslySetInnerHTML={{ __html: data.content }}>
                 </div>
 
-                {isSignedIn && <div className="hidden md:block px-4 h-max stickey top-8">
-                    <h1 className="mt-8 mb-4 text-sm font-medium">Author</h1>
-                    <div className="flex flex-col gap-4">
-                        <div className="flex items-center gap-8">
-                            <Image src='userImg.jpeg' className='w-12 h-12 rounded-full object-cover' />
-                            <Link className="text-blue-800">{data.user.username}</Link>
+                {isSignedIn && <div className="hidden md:block px-6 h-max sticky top-20 w-72">
+                    <h1 className="mt-8 mb-4 text-sm font-semibold text-gray-700">Author</h1>
+                    <div className="flex flex-col gap-4 bg-white p-4 rounded-xl shadow-sm">
+                        <div className="flex items-center gap-4">
+                        <Image
+                            src="userImg.jpeg"
+                            className="w-12 h-12 rounded-full object-cover"
+                            alt="author"
+                        />
+                        <Link to={`/profile/${data.user.username}`} className="text-blue-700 font-medium hover:underline">
+                            {data.user.username}
+                        </Link>
                         </div>
-                        <p className="text-sm text-grey-500">Be Wise</p>
-                        <div className="flex items-center py-2 pb-4">
-                            <Link>
-                                <Image src='facebook.svg' />
+                        <p className="text-sm text-gray-500">Be Wise</p>
+                        <div className="flex gap-4 pt-2 text-lg">
+                            <Link to="https://facebook.com" target="_blank" aria-label="Facebook">
+                                <FaFacebookF className="text-[#1877F2] hover:scale-110 transition-transform" />
                             </Link>
-                            <Link>
-                                <Image src='instagram.svg' />
+                            <Link to="https://instagram.com" target="_blank" aria-label="Instagram">
+                                <FaInstagram className="text-[#E4405F] hover:scale-110 transition-transform" />
+                            </Link>
+                            <Link to="https://linkedin.com" target="_blank" aria-label="LinkedIn">
+                                <FaLinkedinIn className="text-[#0A66C2] hover:scale-110 transition-transform" />
                             </Link>
                         </div>
+                        
                     </div>
-                    <PostMenuActions post={data}/>
-                    <h1 className="mt-8 mb-4 text-sm font-medium">Categories</h1>
-                    <div className="flex flex-col gap-3 text-sm">
-                        <Link className="hover:text-blue-600" to='/'>All</Link>
-                        <Link className="hover:text-blue-600" to='/'>Web Design</Link>
-                        <Link className="hover:text-blue-600" to='/'>Development</Link>
-                        <Link className="hover:text-blue-600" to='/'>Database</Link>
-                        <Link className="hover:text-blue-600" to='/'>Search Engines</Link>
-                        <Link className="hover:text-blue-600" to='/'>Marketing</Link>
-                    </div>
-                    <h1 className="mt-8 mb-4 text-md font-medium">Search</h1>
-                     <Search/>
-                </div>
-                }
 
-                
+                    {/* Post Actions */}
+                    <div className="mt-8">
+                        <PostMenuActions post={data} />
+                    </div>
+
+                    {/* Categories */}
+                    <h1 className="mt-10 mb-4 text-sm font-semibold text-gray-700">Categories</h1>
+                    <div className="flex flex-col gap-3 text-sm text-gray-600">
+                        <Link className="hover:text-blue-600 transition" to="/posts">All</Link>
+                        <Link className="hover:text-blue-600 transition" to="/posts?cat=web-design">Web Design</Link>
+                        <Link className="hover:text-blue-600 transition" to="/posts?cat=development">Development</Link>
+                        <Link className="hover:text-blue-600 transition" to="/posts?cat=databases">Databases</Link>
+                        <Link className="hover:text-blue-600 transition" to="/posts?cat=seo">Search Engines</Link>
+                        <Link className="hover:text-blue-600 transition" to="/posts?cat=marketing">Marketing</Link>
+                    </div>
+
+                    {/* Search */}
+                    <h1 className="mt-10 mb-4 text-sm font-semibold text-gray-700">Search</h1>
+                    <Search />
+                    </div>
+                }
             </div>
             {isSignedIn && <Comments postId={data._id}/>}
         </div>

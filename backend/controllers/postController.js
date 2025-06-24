@@ -11,7 +11,8 @@ export const getPosts = async (req,res)=>{
 
     const query = {};
 
-
+    query.status = 'published';
+    query.publishAt = { $lte: new Date() };
     const cat = req.query.cat;
     const author = req.query.author;
     const searchQuery = req.query.search;
@@ -132,7 +133,20 @@ export const createPost = async (req,res)=>{
             counter++;
         }
 
-        const newPost = new Post({user:user._id,slug,...req.body})
+        const { publishAt, ...rest } = req.body;
+
+        let parsedPublishAt = publishAt ? new Date(publishAt) : new Date();
+        if (isNaN(parsedPublishAt.getTime())) parsedPublishAt = new Date();
+
+        const isScheduled = parsedPublishAt > new Date();
+
+        const newPost = new Post({
+          user: user._id,
+          slug,
+          publishAt: parsedPublishAt,
+          status: isScheduled ? 'scheduled' : 'published',
+          ...rest
+        });
         const post = await newPost.save()
         res.status(200).json(post)
         
@@ -140,6 +154,50 @@ export const createPost = async (req,res)=>{
         console.log(error)
     }
     
+}
+
+// PATCH /api/edit/:id
+export const editPost = async (req,res) => {
+    const clerkUserId = req.auth.userId;
+
+    if (!clerkUserId) {
+      return res.status(401).json("Not authenticated!");
+    }
+
+    const role = req.auth.sessionClaims?.metadata?.role || "user";
+
+    let post;
+
+    if (role === "admin") {
+      post = await Post.findById(req.params.id);
+    } else {
+      const user = await User.findOne({ clerkUserId });
+      post = await Post.findOne({ _id: req.params.id, user: user?._id });
+    }
+
+    if (!post) {
+      // Silently ignore or return minimal response
+      return res.status(200).json(null); // or return unchanged/null safely
+    }
+
+    // Avoid updating immutable fields
+    const { user: _ignoreUser, ...allowedFields } = req.body;
+    
+    allowedFields.slug = req.body.title.toLowerCase()
+                      .replace(/[^\w\s-]/g, '')  
+                      .trim()                  
+                      .replace(/\s+/g, '-')
+                      .replace(/-+/g, '-');  
+    
+    const updatedPost = await Post.findByIdAndUpdate(
+      req.params.id,
+      { $set: allowedFields },
+      { new: true }
+    );
+
+    res.status(200).json(updatedPost);
+
+  
 }
 
 export const deletePost = async (req,res)=>{

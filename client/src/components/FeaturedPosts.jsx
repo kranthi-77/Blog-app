@@ -14,19 +14,40 @@ const fetchPost = async () => {
 };
 
 const FeaturedPosts = () => {
-  const { isPending, error, data } = useQuery({
+  const {
+    isPending,
+    error,
+    data,
+    refetch, 
+  } = useQuery({
     queryKey: ["featuredPosts"],
-    queryFn: () => fetchPost(),
+    queryFn: fetchPost,
   });
 
-  if (isPending) return <Loading/>;
-  if (error) return(
-    <div className="flex flex-col items-center py-4 " >
-      <img alt='not-loaded' src='https://assets.ccbp.in/frontend/react-js/nxt-trendz/nxt-trendz-products-error-view.png'/>
-      <h1>Something went wrong! ${error.message}</h1>
-    </div>
-  ) 
+  if (isPending) return <Loading />;
 
+  if (error)
+    return (
+      <div className="flex flex-col items-center justify-center min-h-[60vh] px-4 text-center">
+        <img
+          alt="Error loading"
+          src="https://assets.ccbp.in/frontend/react-js/nxt-trendz/nxt-trendz-products-error-view.png"
+          className="w-64 mb-6"
+        />
+        <h1 className="text-2xl font-semibold text-gray-800 mb-2">Oops! Something went wrong</h1>
+        <p className="text-gray-600 mb-6">
+          We couldn't load the featured posts. Please try again.
+        </p>
+        <div className="flex gap-4">
+          <button
+            onClick={() => refetch()}
+            className="bg-blue-800 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-full shadow transition"
+          >
+            Try Again
+          </button>
+        </div>
+      </div>
+    )
   const posts = data.posts;
   if (!posts || posts.length === 0) {
     return;

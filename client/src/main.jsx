@@ -65,6 +65,11 @@ const router = createBrowserRouter([
         path: "/register",
         element: <RegisterPage />,
       },
+      {
+        path:"/edit/:slug",
+        element:<Write/>,
+
+      },
     ],
   },
 ]);

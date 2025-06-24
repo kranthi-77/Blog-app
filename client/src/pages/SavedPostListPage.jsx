@@ -1,15 +1,17 @@
 import React from 'react';
 import { useState } from "react"
 import SavedPostsList from '../components/SavedPostList';
+import SavedPostsHeader from '../components/SavedPostsHeader';
 
 const SavedPostListPage = ()=>{
     const [open,setOpen] =useState()
+    const [count, setCount] = useState(0)
     return (
-        <div>
-            <h1 className="mb-8 text-2xl">Your Saved Posts</h1>
+        <div className='mt-10 px-4'>
+            <SavedPostsHeader count={count} />
             <div className="flex flex-col-reverse md:flex-row gap-8">
                 <div className="">
-                    <SavedPostsList />
+                    <SavedPostsList onCountChange={setCount}/>
                 </div>
             </div>
         </div>
